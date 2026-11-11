@@ -1,11 +1,32 @@
-<script setup></script>
+<script setup>
+
+import { ref } from 'vue';
+
+const data = ref(null)
+
+async function obtainProducts() {
+  try{
+    const response = await fetch('http://localhost:8000/products');
+
+    if(!response.ok){
+      throw new Error(`Error in the request: ${response.status}`);
+    }
+      
+    data.value = await response.json();
+    console.log(data.value)
+  }
+  catch (error){
+    console.log("There was an error with the request: " + error);
+  } 
+}
+
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div>
+    <button v-on:click="obtainProducts">Click here</button>
+    <p>{{ data }}</p>
+  </div>  
 </template>
 
 <style scoped></style>
