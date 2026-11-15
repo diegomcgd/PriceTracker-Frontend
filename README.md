@@ -1,0 +1,1 @@
+Implementation of Frontend for Price Tracker in Vanilla JS
