@@ -1,4 +1,9 @@
+let products;
+
 async function loadProducts(){
+
+    document.getElementById("message").innerText = sessionStorage.getItem("message");
+    sessionStorage.removeItem("message");
     
     const response = await fetch("http://localhost:8000/products");
     
@@ -9,18 +14,19 @@ async function loadProducts(){
 
         // Save the response into an object with json() method
         // We could do the same using text() method and then JSON.parse()
-        let products = await response.json();
+        products = await response.json();
 
         let html = "";
 
         for (let product of products){
-            html += `<li>${product.url}</li>`;
+            html += `<tr><td><a href=${product.url}>Nombre</a></td>`;
+            html += `<td>${product.id}<td></tr>`;
         }
 
-        document.getElementById("products").innerHTML = html;
+        document.getElementById("table").innerHTML = html;
 
     } catch (err){
-        document.getElementById("error").innerHTML = err.message;
+        document.getElementById("error").textContent = err.message;
     }
 }
 
