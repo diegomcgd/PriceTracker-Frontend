@@ -8,6 +8,12 @@ async function addProduct(event){
 
     try{
 
+        // Check that the URL is valid
+
+        await checkUrl(url.value);
+
+        // Send the new product to the API
+
         const response = await fetch("http://localhost:8000/products", {
             method: "POST",
             headers: {
@@ -36,3 +42,17 @@ async function addProduct(event){
 }
 
 document.getElementById("new_product_form").addEventListener("submit", addProduct);
+
+
+async function checkUrl(urlToCheck){
+    const url = new URL(urlToCheck);
+
+    if (url.protocol !== "https:")
+        throw new Error("Error: the URL is not valid");
+
+    if (url.hostname !== "www.thomann.es")
+        throw new Error("Error: the URL is not valid");
+
+    if (!url.pathname.toLowerCase().endsWith(".htm"))
+        throw new Error("Error: the URL is not valid");
+}
