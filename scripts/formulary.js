@@ -7,6 +7,7 @@ async function addProduct(event){
     const url = document.getElementById("product_url");
 
     try{
+
         const response = await fetch("http://localhost:8000/products", {
             method: "POST",
             headers: {

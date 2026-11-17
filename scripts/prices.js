@@ -15,7 +15,7 @@ async function loadPrices(){
         prices = await response.json();
 
         if (prices.length == 0){
-            document.getElementById("message").innerText = "No history found for this product"
+            document.getElementById("advise").innerText = "No history found for this product"
         }
 
         let html = "";

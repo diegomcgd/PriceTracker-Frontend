@@ -20,7 +20,7 @@ async function loadProducts(){
 
         for (let product of products){
             html += `<tr><td><a href=${product.url} target="_blank">Name</a></td>`;
-            html += `<td>${product.id}<td>`;
+            html += `<td>${product.id}</td>`;
             html += `<td><a href="productPrices.html?id=${product.id}">View history</a></td></tr>`;
         }
 

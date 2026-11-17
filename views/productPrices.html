@@ -6,20 +6,32 @@
     <meta lan="en">
     <link rel="icon" type="image/svg" href="../logbrew.svg">
     <title>Prices history</title>
+
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+    <header>
+        <a href="index.html" class="brand">
+            <img src="../logbrew.svg" alt="Logo">
+            <span>Price Tracker</span>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="addProduct.html">Add product</a>
+        </nav>
+    </header>
+    
     <h2>Prices history</h2>
 
-    <p id="message"></p>
+    <p id="advise"></p>
 
-    <p id="demo"></p>
     <table>
-        <thread>
+        <thead>
             <tr>
                 <th>Date</th>
                 <th>Price</th>
             </tr>
-        </thread>
+        </thead>
         <tbody id="prices">
         </tbody>
     </table>
