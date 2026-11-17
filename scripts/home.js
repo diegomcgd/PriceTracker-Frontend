@@ -19,8 +19,9 @@ async function loadProducts(){
         let html = "";
 
         for (let product of products){
-            html += `<tr><td><a href=${product.url}>Nombre</a></td>`;
-            html += `<td>${product.id}<td></tr>`;
+            html += `<tr><td><a href=${product.url} target="_blank">Name</a></td>`;
+            html += `<td>${product.id}<td>`;
+            html += `<td><a href="productPrices.html?id=${product.id}">View history</a></td></tr>`;
         }
 
         document.getElementById("table").innerHTML = html;

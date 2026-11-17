@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta lang="en">
     <title>Add new product</title>
+    <link rel="icon" type="image/svg" href="../logbrew.svg">
+
 </head>
 <body>
+    <h2>New product</h2>
     <form id="new_product_form">
         <label for="product_url">URL of the new product:</label><br>
         <input type="url" id="product_url" name="product_url" placeholder="URL" required><br><br>
-        <input type="submit" >
+        <input type="submit" value="Submit">
     </form>
 
     <p id="error"></p>
 
-    <p id="demo"></p>
+    <a id="back" href="index.html">Back</a>
 
     <script src="../scripts/formulary.js"></script>
 </body>
