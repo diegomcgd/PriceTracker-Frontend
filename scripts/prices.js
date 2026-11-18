@@ -20,9 +20,11 @@ async function loadPrices(){
 
         let html = "";
 
-        for (let price of prices){
-            html += `<tr><td>${price.date}</td>`;
-            html += `<td>${price.price}</td></tr>`;
+        for (let price of prices.toReversed()){
+            const date = new Date(price.date);
+
+            html += `<tr><td>${date.toLocaleDateString('es-Es')}</td>`;
+            html += `<td>${price.price} €</td></tr>`;
         }
 
         document.getElementById("prices").innerHTML = html;

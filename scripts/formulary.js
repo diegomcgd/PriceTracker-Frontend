@@ -26,6 +26,9 @@ async function addProduct(event){
         if (response.status == 409){
             throw new Error("Error: the product is already in the database")
         }
+        if (response.status == 422){
+            throw new Error("Error: can't find a product in that URL")
+        }
         else if (!response.ok){
             throw new Error("Error adding the new product")
         }
@@ -55,4 +58,17 @@ async function checkUrl(urlToCheck){
 
     if (!url.pathname.toLowerCase().endsWith(".htm"))
         throw new Error("Error: the URL is not valid");
+
+    // Check the URL is valid. Node.js needed
+    //
+    // const response = await fetch(url, {
+    //     method: "GET",
+    //     headers: {
+    //         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    //         "Accept-Language": "es-ES,es;q=0.9",
+    //     }
+    // });
+
+    // if (!response.ok)
+    //     throw new Error("Error: the URL is not valid");
 }

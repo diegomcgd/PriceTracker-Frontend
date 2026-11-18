@@ -310,3 +310,16 @@ header nav a:hover {
     gap: 0.75rem;
   }
 }
+
+/* Evitar saltos de línea en la columna del precio */
+th:last-child,
+td:last-child {
+  white-space: nowrap;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* Permitir que las URLs largas se corten sin empujar a las demás columnas */
+td a {
+  word-break: break-all;
+}
