@@ -323,3 +323,310 @@ td:last-child {
 td a {
   word-break: break-all;
 }
+
+
+/* Tarjeta de cabecera del producto (productPrices.html) */
+.product-card {
+  width: 100%;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.product-label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Sobrescribimos los estilos globales de h2 para el título del producto */
+.product-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 0;
+  background: none;
+  -webkit-text-fill-color: var(--text-main);
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+/* Botón para ir a la tienda */
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Evita que el botón se aplaste si el nombre es largo */
+  background-color: var(--accent);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.store-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Responsivo: en móvil el botón pasa debajo del nombre */
+@media (max-width: 600px) {
+  .product-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .store-btn {
+    width: 100%;
+  }
+}
+
+
+
+/* Tarjetas de resumen de precios (Minimum / Maximum price) */
+.price-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.price-item {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.price-item dt {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Precio mínimo y máximo destacados */
+#min-price,
+#max-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0.25rem;
+}
+
+/* Verde para el precio mínimo (buena oportunidad) */
+#min-price {
+  color: var(--success);
+}
+
+/* Azul oscuro o acento para el máximo */
+#max-price {
+  color: var(--text-main);
+}
+
+/* Fechas en pequeño debajo del precio */
+#min-date,
+#max-date {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* En móviles se apilan una debajo de otra */
+@media (max-width: 550px) {
+  .price-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Contenedor derecho que agrupa el precio actual y el botón */
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.current-price-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.current-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Ajuste responsivo para móviles */
+@media (max-width: 650px) {
+  .product-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .product-actions {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .current-price-box {
+    align-items: flex-start;
+  }
+
+  .store-btn {
+    width: auto;
+  }
+}
+
+
+
+/* Hacemos el precio actual notablemente más grande y contundente */
+.current-price {
+  font-size: 2.35rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* Reducimos ligeramente los históricos para marcar jerarquía clara */
+#min-price,
+#max-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0.25rem;
+}
+
+
+/* Contenedor con scroll para la tabla del historial de precios */
+.table-scroll {
+  width: 100%;
+  max-height: 350px; /* Ajusta esta altura según cuántas filas quieras ver a la vez */
+  overflow-y: auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+/* Quitamos el borde/sombra duplicados de la tabla interior */
+.table-scroll table {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Cabecera fija al hacer scroll */
+.table-scroll th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f1f5f9;
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* Barra de desplazamiento fina y moderna */
+.table-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+
+/* Asegurar que el body ocupe toda la pantalla para empujar el footer abajo */
+body {
+  min-height: 100vh;
+}
+
+/* Pie de página */
+footer {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Separación extra respecto al contenido superior */
+body > *:nth-last-child(3) {
+  margin-bottom: 3rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* Ajuste responsivo para móviles */
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+}
+

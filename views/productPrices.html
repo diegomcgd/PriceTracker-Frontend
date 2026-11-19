@@ -25,19 +25,62 @@
 
     <p id="advise"></p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody id="prices">
-        </tbody>
-    </table>
+    <div class="product-card">
+        <div class="product-info">
+            <span class="product-label">PRODUCT</span>
+            <h3 id="product-name" class="product-title"></h3>
+        </div>
+        <div class="product-actions">
+            <div class="current-price-box">
+                <span class="product-label">Current price</span>
+                <span id="current-price" class="current-price">-- €</span>
+            </div>
+            <a id="buy-button" class="store-btn" href="#" target="_blank" rel="noopener noreferrer">
+                View on Thomann
+            </a>
+        </div>
+    </div>
+
+    <dl class="price-stats">
+        <div class="price-item">
+            <dt>Minimum price</dt>
+            <dd id="min-price"></dd>
+            <dd id="min-date"></dd>
+        </div>
+        <div class="price-item">
+            <dt>Maximum price</dt>
+            <dd id="max-price"></dd>
+            <dd id="max-date"></dd>
+        </div>
+    </dl>
+
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="prices">
+            </tbody>
+        </table>
+    </div>
 
     <a id="back" href="index.html">Back</a>
 
+
+    <footer>
+        <p>Price Tracker · Automated Thomann price monitoring</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="addProduct.html">Add product</a>
+            <a href="https://www.thomann.es" target="_blank" rel="noopener noreferrer">Thomann Store ↗</a>
+        </div>
+    </footer>
+
     <script src="../scripts/prices.js"></script>
+
+
 </body>
 </html>
