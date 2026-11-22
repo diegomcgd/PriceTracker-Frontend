@@ -1,18 +1,24 @@
-/* Importar fuente moderna (Inter) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ==========================================================================
+   1. VARIABLES Y RESET
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-main: #f8fafc;        /* Fondo principal blanco roto muy suave */
-  --bg-card: #ffffff;        /* Fondo blanco puro para tarjetas y tablas */
-  --bg-hover: #f1f5f9;       /* Hover suave en filas */
-  --text-main: #0f172a;      /* Texto principal oscuro para alto contraste */
-  --text-muted: #64748b;     /* Texto secundario gris medio */
-  --accent: #0284c7;         /* Azul corporativo estilo Thomann */
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent: #0284c7;
   --accent-hover: #0369a1;
-  --danger: #dc2626;         /* Rojo para errores */
-  --success: #16a34a;        /* Verde para mensajes */
-  --border: #e2e8f0;         /* Bordes grises muy sutiles */
+  --danger: #dc2626;
+  --success: #16a34a;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
   --radius: 10px;
+  --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --shadow-accent: 0 4px 12px rgba(2, 132, 199, 0.25);
 }
 
 * {
@@ -27,6 +33,7 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   max-width: 900px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 3rem 1.5rem;
   display: flex;
@@ -34,29 +41,28 @@ body {
   align-items: center;
 }
 
-/* Títulos */
+body > *:nth-last-child(3) {
+  margin-bottom: 3rem;
+}
+
+/* ==========================================================================
+   2. TIPOGRAFÍA Y ALERTAS
+   ========================================================================== */
 h1, h2 {
   font-weight: 700;
   letter-spacing: -0.025em;
   margin-bottom: 0.75rem;
   text-align: center;
-  background: linear-gradient(90deg, #0f172a, var(--accent));
+  background: linear-gradient(90deg, var(--text-main), var(--accent));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
-h1 {
-  font-size: 2.5rem;
-}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; margin-bottom: 1.5rem; }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Textos informativos y mensajes de estado */
 #presentation, #advise {
   color: var(--text-muted);
   text-align: center;
@@ -64,10 +70,17 @@ h2 {
   font-size: 1.05rem;
 }
 
-#error:not(:empty) {
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  color: var(--danger);
+.product-label,
+.price-item dt {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#error:not(:empty),
+#message:not(:empty) {
   padding: 0.75rem 1.25rem;
   border-radius: var(--radius);
   margin: 1rem 0;
@@ -76,49 +89,125 @@ h2 {
   text-align: center;
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+#error:not(:empty) {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--danger);
 }
 
 #message:not(:empty) {
   background-color: #f0fdf4;
   border: 1px solid #bbf7d0;
   color: var(--success);
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius);
-  margin: 1rem 0;
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 
-/* Enlaces convertidos en botones (Add product / Back) */
-body > a {
+/* ==========================================================================
+   3. CABECERA Y PIE DE PÁGINA
+   ========================================================================== */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-card);
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+}
+
+header .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+header .brand img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+header nav,
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+header nav a,
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+header nav a { font-size: 0.95rem; }
+
+header nav a:hover,
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+footer {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   4. BOTONES Y ENLACES DE ACCIÓN
+   ========================================================================== */
+body > a,
+.store-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+body > a {
   font-size: 0.95rem;
   padding: 0.65rem 1.5rem;
   border-radius: var(--radius);
-  transition: all 0.2s ease;
-  margin: 0.5rem 0 2rem 0;
+  margin: 0.5rem 0 2rem;
 }
 
-/* Botón principal ("Add product") */
-body > a:not(#back) {
+body > a:not(#back),
+.store-btn {
   background-color: var(--accent);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+  box-shadow: var(--shadow-accent);
 }
 
-body > a:not(#back):hover {
+body > a:not(#back):hover,
+.store-btn:hover {
   background-color: var(--accent-hover);
   transform: translateY(-2px);
 }
 
-/* Botón secundario ("Back") */
+.store-btn {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 8px;
+}
+
 #back {
   background-color: var(--bg-card);
   color: var(--text-muted);
@@ -130,10 +219,12 @@ body > a:not(#back):hover {
 #back:hover {
   background-color: var(--bg-hover);
   color: var(--text-main);
-  border-color: #cbd5e1;
+  border-color: var(--border-strong);
 }
 
-/* Formulario (addProduct.html) */
+/* ==========================================================================
+   5. FORMULARIO (addProduct.html)
+   ========================================================================== */
 #new_product_form {
   background-color: var(--bg-card);
   padding: 2rem;
@@ -141,7 +232,7 @@ body > a:not(#back):hover {
   border: 1px solid var(--border);
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 #new_product_form br {
@@ -152,7 +243,6 @@ body > a:not(#back):hover {
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-main);
   font-size: 0.95rem;
 }
 
@@ -160,17 +250,17 @@ body > a:not(#back):hover {
   width: 100%;
   padding: 0.8rem 1rem;
   background-color: var(--bg-main);
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
   color: var(--text-main);
   font-size: 1rem;
   margin-bottom: 1.5rem;
   outline: none;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
 #new_product_form input[type="url"]:focus {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
 }
@@ -196,144 +286,21 @@ body > a:not(#back):hover {
   transform: scale(0.98);
 }
 
-/* Tablas (index.html y productPrices.html) */
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* ==========================================================================
+   6. DETALLE DE PRODUCTO Y ESTADÍSTICAS (productPrices.html)
+   ========================================================================== */
+.product-card,
+.price-item {
   background-color: var(--bg-card);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
   border: 1px solid var(--border);
-}
-
-th, td {
-  padding: 1rem 1.25rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-
-th {
-  background-color: #f1f5f9;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-tbody tr {
-  transition: background-color 0.15s ease;
-}
-
-tbody tr:hover {
-  background-color: var(--bg-hover);
-}
-
-tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Enlaces dentro de la tabla */
-table a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-table a:hover {
-  text-decoration: underline;
-}
-
-/* Responsivo para móviles */
-@media (max-width: 600px) {
-  body {
-    padding: 2rem 1rem;
-  }
-  th, td {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-  }
-}
-
-/* Cabecera de navegación */
-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--bg-card);
-  padding: 0.9rem 1.5rem;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
-  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-md);
 }
 
-header .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-header .brand img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-header nav {
-  display: flex;
-  gap: 1.25rem;
-}
-
-header nav a {
-  text-decoration: none;
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-}
-
-header nav a:hover {
-  color: var(--accent);
-}
-
-/* Ajuste para pantallas pequeñas */
-@media (max-width: 500px) {
-  header {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
-
-/* Evitar saltos de línea en la columna del precio */
-th:last-child,
-td:last-child {
-  white-space: nowrap;
-  text-align: right;
-  font-weight: 600;
-}
-
-/* Permitir que las URLs largas se corten sin empujar a las demás columnas */
-td a {
-  word-break: break-all;
-}
-
-
-/* Tarjeta de cabecera del producto (productPrices.html) */
 .product-card {
   width: 100%;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   padding: 1.5rem;
   margin-bottom: 1.25rem;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -346,15 +313,6 @@ td a {
   gap: 0.35rem;
 }
 
-.product-label {
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* Sobrescribimos los estilos globales de h2 para el título del producto */
 .product-title {
   font-size: 1.35rem;
   font-weight: 700;
@@ -366,108 +324,6 @@ td a {
   line-height: 1.3;
 }
 
-/* Botón para ir a la tienda */
-.store-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0; /* Evita que el botón se aplaste si el nombre es largo */
-  background-color: var(--accent);
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.7rem 1.25rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.store-btn:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-2px);
-}
-
-/* Responsivo: en móvil el botón pasa debajo del nombre */
-@media (max-width: 600px) {
-  .product-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .store-btn {
-    width: 100%;
-  }
-}
-
-
-
-/* Tarjetas de resumen de precios (Minimum / Maximum price) */
-.price-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-.price-item {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.price-item dt {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* Precio mínimo y máximo destacados */
-#min-price,
-#max-price {
-  font-size: 1.75rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-top: 0.25rem;
-}
-
-/* Verde para el precio mínimo (buena oportunidad) */
-#min-price {
-  color: var(--success);
-}
-
-/* Azul oscuro o acento para el máximo */
-#max-price {
-  color: var(--text-main);
-}
-
-/* Fechas en pequeño debajo del precio */
-#min-date,
-#max-date {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-}
-
-/* En móviles se apilan una debajo de otra */
-@media (max-width: 550px) {
-  .price-stats {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
-/* Contenedor derecho que agrupa el precio actual y el botón */
 .product-actions {
   display: flex;
   align-items: center;
@@ -482,14 +338,143 @@ td a {
 }
 
 .current-price {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 2.35rem;
+  font-weight: 800;
   color: var(--accent);
-  line-height: 1.1;
+  line-height: 1;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
-/* Ajuste responsivo para móviles */
+.price-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.price-item {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.price-item dt {
+  font-size: 0.8rem;
+}
+
+#min-price,
+#max-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0.25rem;
+}
+
+#min-price { color: var(--success); }
+#max-price { color: var(--text-main); }
+
+#min-date,
+#max-date {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   7. TABLAS Y SCROLL
+   ========================================================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+th, td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background-color: var(--bg-hover);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+th:last-child,
+td:last-child {
+  white-space: nowrap;
+  text-align: right;
+  font-weight: 600;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+table a:hover {
+  text-decoration: underline;
+}
+
+td a {
+  word-break: break-all;
+}
+
+.table-scroll {
+  width: 100%;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.table-scroll table {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.table-scroll th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.table-scroll::-webkit-scrollbar { width: 8px; }
+.table-scroll::-webkit-scrollbar-track { background: var(--bg-main); }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+.table-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ==========================================================================
+   8. RESPONSIVO
+   ========================================================================== */
 @media (max-width: 650px) {
   .product-card {
     flex-direction: column;
@@ -507,122 +492,18 @@ td a {
   .current-price-box {
     align-items: flex-start;
   }
-
-  .store-btn {
-    width: auto;
-  }
 }
 
-
-
-/* Hacemos el precio actual notablemente más grande y contundente */
-.current-price {
-  font-size: 2.35rem;
-  font-weight: 800;
-  color: var(--accent);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-
-/* Reducimos ligeramente los históricos para marcar jerarquía clara */
-#min-price,
-#max-price {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-top: 0.25rem;
-}
-
-
-/* Contenedor con scroll para la tabla del historial de precios */
-.table-scroll {
-  width: 100%;
-  max-height: 350px; /* Ajusta esta altura según cuántas filas quieras ver a la vez */
-  overflow-y: auto;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
-}
-
-/* Quitamos el borde/sombra duplicados de la tabla interior */
-.table-scroll table {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* Cabecera fija al hacer scroll */
-.table-scroll th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: #f1f5f9;
-  box-shadow: 0 1px 0 var(--border);
-}
-
-/* Barra de desplazamiento fina y moderna */
-.table-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.table-scroll::-webkit-scrollbar-track {
-  background: var(--bg-main);
-}
-
-.table-scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-.table-scroll::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-
-
-/* Asegurar que el body ocupe toda la pantalla para empujar el footer abajo */
-body {
-  min-height: 100vh;
-}
-
-/* Pie de página */
-footer {
-  width: 100%;
-  margin-top: auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-/* Separación extra respecto al contenido superior */
-body > *:nth-last-child(3) {
-  margin-bottom: 3rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 1.25rem;
-}
-
-.footer-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: var(--accent);
-}
-
-/* Ajuste responsivo para móviles */
 @media (max-width: 600px) {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
   footer {
     flex-direction: column;
     gap: 0.75rem;
@@ -630,3 +511,15 @@ body > *:nth-last-child(3) {
   }
 }
 
+@media (max-width: 550px) {
+  .price-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
